@@ -21,7 +21,9 @@ public class MyArrayList<T> implements List<T> {
     }
 
     private void ensureCapacity(int value) {
-        if (value >= CAPACITY) {
+        if (size * 2 < array.length) {
+            array = Arrays.copyOf(array, array.length / 2);
+        } else if (value >= CAPACITY) {
             array = Arrays.copyOf(array, value * 2);
         }
     }
@@ -76,6 +78,7 @@ public class MyArrayList<T> implements List<T> {
         int lengthOfCopy = size - index - 1;
         System.arraycopy(array, index + 1, array, index, lengthOfCopy);
         array[--size] = null;
+        ensureCapacity(0);
         return result;
     }
 
