@@ -32,14 +32,14 @@ public class MyLinkedList<T> implements List<T>{
         size++;
     }
 
-    private void checkIndex(int index, int sizeDecrease) {
-        if ((index > size - sizeDecrease) || index < 0) {
+    private void checkIndex(int index) {
+        if ((index > size - 1) || index < 0) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
     }
 
     public void add(T value, int index) {
-        checkIndex(index, 0);
+        checkIndex(index - 1);
         if (index == size) {
             add(value);
         } else if (index == 0) {
@@ -99,7 +99,7 @@ public class MyLinkedList<T> implements List<T>{
     }
 
     public T remove(int index) {
-        checkIndex(index, 1);
+        checkIndex(index);
         Node<T> removed = getNode(index);
         if (index == 0) {
             firstNode = getNode(index + 1);
@@ -120,7 +120,7 @@ public class MyLinkedList<T> implements List<T>{
     }
 
     private Node<T> getNode(int index) {
-        checkIndex(index, 1);
+        checkIndex(index);
         Node<T> currentNode = firstNode;
         for (int i = 0; i < index; i++) {
             currentNode = currentNode.next;
@@ -129,7 +129,7 @@ public class MyLinkedList<T> implements List<T>{
     }
 
     public T get(int index) {
-        checkIndex(index, 1);
+        checkIndex(index);
         Node<T> currentNode = firstNode;
         for (int i = 0; i < index; i++) {
             currentNode = currentNode.next;
@@ -143,7 +143,7 @@ public class MyLinkedList<T> implements List<T>{
             return "";
         }
         StringBuilder result = new StringBuilder(get(0).toString());
-        for (int i = 1; i < size(); i++) {
+        for (int i = 1; i < size; i++) {
             result.append(", ");
             result.append(get(i));
         }

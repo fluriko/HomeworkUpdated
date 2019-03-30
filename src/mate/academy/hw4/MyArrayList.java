@@ -4,8 +4,16 @@ import java.util.Arrays;
 
 public class MyArrayList<T> implements List<T> {
     private int size = 0;
-    private final int CAPACITY = 16;
-    private T[] array = (T[]) new Object[CAPACITY];
+    private static final int CAPACITY = 16;
+    private T[] array;
+
+    public MyArrayList(int length) {
+        array = (T[]) new Object[length];
+    }
+
+    public MyArrayList() {
+        this(CAPACITY);
+    }
 
     private void clear() {
         array = (T[]) new Object[CAPACITY];
@@ -42,19 +50,19 @@ public class MyArrayList<T> implements List<T> {
         return Arrays.copyOf(array, size);
     }
 
-    private void checkIndex(int index, int sizeDecrease) {
-        if ((index > size - sizeDecrease) || index < 0) {
+    private void checkIndex(int index) {
+        if ((index > size - 1) || index < 0) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
     }
 
     public T get(int index) {
-        checkIndex(index, 1);
+        checkIndex(index);
         return array[index];
     }
 
     public void set(T value, int index) {
-        checkIndex(index, 0);
+        checkIndex(index - 1);
         if (index == size) {
             add(value);
         } else {

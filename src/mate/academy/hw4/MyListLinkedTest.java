@@ -2,7 +2,7 @@ package mate.academy.hw4;
 
 public class MyListLinkedTest {
     public static void main(String[] args) {
-        MyLinkedList<String> myLinkedList = new MyLinkedList<>();
+        List<String> myLinkedList = new MyLinkedList<>();
         myLinkedList.add("first");
         myLinkedList.add("second");
         myLinkedList.add("third");
@@ -36,14 +36,14 @@ public class MyListLinkedTest {
         System.out.println("\nMy linked list after replacing value on index:");
         System.out.println(myLinkedList);
 
-        List anotherList = new MyLinkedList<>();
+        List<String> anotherList = new MyLinkedList<>();
         anotherList.add("Hallo");
         anotherList.add("Rain");
         myLinkedList.addAll(anotherList);
         System.out.println("\nMy linked list after appending another linked list:");
         System.out.println(myLinkedList);
 
-        List myArrayList = new MyArrayList<>();
+        List<String> myArrayList = new MyArrayList<>();
         myArrayList.add("Sunday");
         myArrayList.add("Monday");
         myArrayList.add("Tuesday");

@@ -2,7 +2,7 @@ package mate.academy.hw4;
 
 public class MyArrayListTest {
     public static void main(String[] args) {
-        List myArrayList = new MyArrayList<>();
+        List<String> myArrayList = new MyArrayList<>();
         myArrayList.add("Sunday");
         myArrayList.add("Monday");
         myArrayList.add("Tuesday");
@@ -36,7 +36,7 @@ public class MyArrayListTest {
         System.out.println("\nMy array list after remove element on index 1:");
         System.out.println(myArrayList);
 
-        List myLinkedList = new MyLinkedList<>();
+        List<String> myLinkedList = new MyLinkedList<>();
         myLinkedList.add("first");
         myLinkedList.add("second");
         myLinkedList.add("third");
