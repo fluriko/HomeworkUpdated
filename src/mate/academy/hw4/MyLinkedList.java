@@ -1,6 +1,6 @@
 package mate.academy.hw4;
 
-public class MyLinkedList<T> implements List<T>{
+public class MyLinkedList<T> implements List<T> {
     private int size = 0;
     private Node<T> firstNode;
     private Node<T> lastNode;
@@ -57,6 +57,10 @@ public class MyLinkedList<T> implements List<T>{
     }
 
     public void addAll(List<T> list) {
+        if (list.getClass() == this.getClass()) {
+            MyLinkedList<T> linkedList = (MyLinkedList<T>) list;
+            addAll(linkedList);
+        }
         for (int i = 0; i < list.size(); i++) {
             this.add(list.get(i));
         }

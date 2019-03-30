@@ -32,6 +32,7 @@ public class MyArrayList<T> implements List<T> {
     }
 
     public void add(T value, int index) {
+        checkIndex(index - 1);
         ensureCapacity(size);
         int lengthOfCopy = size - index;
         System.arraycopy(array, index, array, index + 1, lengthOfCopy);
