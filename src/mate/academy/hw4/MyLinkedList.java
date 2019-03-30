@@ -2,13 +2,13 @@ package mate.academy.hw4;
 
 public class MyLinkedList<T> implements List<T>{
     private int size = 0;
-    private Node firstNode;
-    private Node lastNode;
+    private Node<T> firstNode;
+    private Node<T> lastNode;
 
-    private class Node {
+    private class Node<T> {
         private T value;
-        private Node next;
-        private Node previous;
+        private Node<T> next;
+        private Node<T> previous;
 
         private Node(T value, Node next, Node previous) {
             this.value = value;
@@ -19,33 +19,37 @@ public class MyLinkedList<T> implements List<T>{
 
     public void add(T value) {
         if (size == 0) {
-            firstNode = new Node(value, lastNode, null);
+            firstNode = new Node<>(value, lastNode, null);
             lastNode = firstNode;
         } else if (size == 1) {
-            lastNode = new Node(value, null, firstNode);
+            lastNode = new Node<>(value, null, firstNode);
             firstNode.next = lastNode;
         } else {
-            Node newNode = new Node(value, lastNode, null);
+            Node<T> newNode = new Node<>(value, lastNode, null);
             lastNode.next = newNode;
             lastNode = newNode;
         }
         size++;
     }
 
-    public void add(T value, int index) {
-        if (index < 0 || index > size()) {
-            throw new IndexOutOfBoundsException();
+    private void checkIndex(int index, int sizeDecrease) {
+        if ((index > size - sizeDecrease) || index < 0) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
-        if (index == size()) {
+    }
+
+    public void add(T value, int index) {
+        checkIndex(index, 0);
+        if (index == size) {
             add(value);
         } else if (index == 0) {
-            Node newNode = new Node(value, firstNode, null);
+            Node<T> newNode = new Node<>(value, firstNode, null);
             firstNode.previous = newNode;
             firstNode = newNode;
         } else {
-            Node next = getNode(index);
-            Node prev = getNode(index - 1);
-            Node newNode = new Node(value, next, prev);
+            Node<T> next = getNode(index);
+            Node<T> prev = getNode(index - 1);
+            Node<T> newNode = new Node<>(value, next, prev);
             next.previous = newNode;
             prev.next = newNode;
         }
@@ -59,9 +63,9 @@ public class MyLinkedList<T> implements List<T>{
     }
 
     public void addAll(MyLinkedList<T> linkedList) {
-        Node lastThis = this.lastNode;
-        Node firstAnother = linkedList.firstNode;
-        Node lastAnother = linkedList.lastNode;
+        Node<T> lastThis = this.lastNode;
+        Node<T> firstAnother = linkedList.firstNode;
+        Node<T> lastAnother = linkedList.lastNode;
         lastThis.next = firstAnother;
         firstAnother.previous = lastThis;
         lastNode = lastAnother;
@@ -77,7 +81,7 @@ public class MyLinkedList<T> implements List<T>{
     }
 
     public void set(T value, int index) {
-        Node toReplace = getNode(index);
+        Node<T> toReplace = getNode(index);
         toReplace.value = value;
     }
 
@@ -95,18 +99,19 @@ public class MyLinkedList<T> implements List<T>{
     }
 
     public T remove(int index) {
-        Node removed = getNode(index);
+        checkIndex(index, 1);
+        Node<T> removed = getNode(index);
         if (index == 0) {
             firstNode = getNode(index + 1);
             firstNode.next = getNode(index + 2);
             firstNode.previous = null;
-        } else if (index == size() - 1) {
+        } else if (index == size - 1) {
             lastNode = getNode(index - 1);
             lastNode.next = null;
             lastNode.previous = getNode(index - 2);
         } else {
-            Node prev = getNode(index - 1);
-            Node next = getNode(index + 1);
+            Node<T> prev = getNode(index - 1);
+            Node<T> next = getNode(index + 1);
             prev.next = next;
             next.previous = prev;
         }
@@ -114,11 +119,9 @@ public class MyLinkedList<T> implements List<T>{
         return removed.value;
     }
 
-    private Node getNode(int index) {
-        if ((index > size() - 1) || index < 0) {
-            throw new IndexOutOfBoundsException();
-        }
-        Node currentNode = firstNode;
+    private Node<T> getNode(int index) {
+        checkIndex(index, 1);
+        Node<T> currentNode = firstNode;
         for (int i = 0; i < index; i++) {
             currentNode = currentNode.next;
         }
@@ -126,10 +129,8 @@ public class MyLinkedList<T> implements List<T>{
     }
 
     public T get(int index) {
-        if ((index > size() - 1) || index < 0) {
-            throw new IndexOutOfBoundsException();
-        }
-        Node currentNode = firstNode;
+        checkIndex(index, 1);
+        Node<T> currentNode = firstNode;
         for (int i = 0; i < index; i++) {
             currentNode = currentNode.next;
         }
@@ -141,8 +142,7 @@ public class MyLinkedList<T> implements List<T>{
         if (size == 0) {
             return "";
         }
-        StringBuilder result = new StringBuilder();
-        result.append(get(0));
+        StringBuilder result = new StringBuilder(get(0).toString());
         for (int i = 1; i < size(); i++) {
             result.append(", ");
             result.append(get(i));

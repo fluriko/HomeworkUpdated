@@ -4,18 +4,17 @@ import java.util.Arrays;
 
 public class MyArrayList<T> implements List<T> {
     private int size = 0;
-    private int capacity = 10;
-    private T[] array = (T[]) new Object[capacity];
+    private final int CAPACITY = 16;
+    private T[] array = (T[]) new Object[CAPACITY];
 
     private void clear() {
-        array = (T[]) new Object[capacity];
+        array = (T[]) new Object[CAPACITY];
         size = 0;
     }
 
     private void ensureCapacity(int value) {
-        if (value == capacity) {
-            capacity *= 2;
-            array = Arrays.copyOf(array, capacity);
+        if (value >= CAPACITY) {
+            array = Arrays.copyOf(array, value * 2);
         }
     }
 
@@ -43,17 +42,20 @@ public class MyArrayList<T> implements List<T> {
         return Arrays.copyOf(array, size);
     }
 
-    public T get(int index) {
-        if ((index > size() - 1) || index < 0) {
-            throw new IndexOutOfBoundsException();
+    private void checkIndex(int index, int sizeDecrease) {
+        if ((index > size - sizeDecrease) || index < 0) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size: " + size);
         }
+    }
+
+    public T get(int index) {
+        checkIndex(index, 1);
         return array[index];
     }
 
     public void set(T value, int index) {
-        if ((index > size()) || index < 0) {
-            throw new IndexOutOfBoundsException();
-        } else if (index == size) {
+        checkIndex(index, 0);
+        if (index == size) {
             add(value);
         } else {
             array[index] = value;

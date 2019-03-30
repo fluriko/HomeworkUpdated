@@ -1,8 +1,6 @@
 package mate.academy.hw4;
 
-// Реализовать свой ArrayList и LinkedList исходя из интерфейса
 public interface List<T> {
-
     void add(T value);
     void add(T value, int index);
     void addAll(List<T> list);

@@ -36,14 +36,14 @@ public class MyListLinkedTest {
         System.out.println("\nMy linked list after replacing value on index:");
         System.out.println(myLinkedList);
 
-        MyLinkedList<String> anotherList = new MyLinkedList<>();
+        List anotherList = new MyLinkedList<>();
         anotherList.add("Hallo");
         anotherList.add("Rain");
         myLinkedList.addAll(anotherList);
         System.out.println("\nMy linked list after appending another linked list:");
         System.out.println(myLinkedList);
 
-        MyArrayList<String> myArrayList = new MyArrayList<>();
+        List myArrayList = new MyArrayList<>();
         myArrayList.add("Sunday");
         myArrayList.add("Monday");
         myArrayList.add("Tuesday");
