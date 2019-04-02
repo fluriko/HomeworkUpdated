@@ -1,7 +1,7 @@
 package mate.academy.hw5;
 
 public class MyHashMap<K, V> {
-    private static final int capacity = 16;
+    private static final int CAPACITY = 16;
     private int size = 0;
     private Node<K, V>[] table;
 
@@ -10,14 +10,14 @@ public class MyHashMap<K, V> {
     }
 
     public MyHashMap() {
-        this(capacity);
+        this(CAPACITY);
     }
 
     private static class Node<K, V> {
-        final int hash;
-        final K key;
-        V value;
-        Node<K, V> next;
+        private final int hash;
+        private final K key;
+        private V value;
+        private Node<K, V> next;
 
         Node(int hash, K key, V value, Node<K,V> next) {
             this.hash = hash;
@@ -38,11 +38,32 @@ public class MyHashMap<K, V> {
         }
     }
 
+    private void increase() {
+        if (size - 1 >= table.length) {
+            indexRedistribution();
+        }
+    }
+
+    private void addNode(Node<K, V> node) {
+        put(node.key, node.value);
+    }
+
+    private void indexRedistribution() {
+        Node<K, V>[] tableOld = table;
+        table = (Node<K, V>[]) new Node[size * 2];
+        for (int i = 0; i < tableOld.length; i++) {
+            if (tableOld[i] != null) {
+                addNode(tableOld[i]);
+            }
+        }
+    }
+
     private final int hash(K key) {
         return key.hashCode() * 12;
     }
 
     public void put(K key, V value) {
+        increase();
         if (indexOf(key) != -1) {
             Node<K, V> current = getNode(key);
             current.setValue(value);
@@ -55,6 +76,7 @@ public class MyHashMap<K, V> {
                 table[index] = current;
             }
         }
+        size++;
     }
 
     public V get(K key) {
@@ -74,10 +96,11 @@ public class MyHashMap<K, V> {
     public V remove(K key) {
         Node<K, V> node = getNode(key);
         table[indexOf(key)] = null;
+        size--;
         return node.value;
     }
 
-    public int indexOf(K key) {
+    private int indexOf(K key) {
         for (int i = 0; i < table.length; i++) {
             if ((table[i] != null) && (hash(key) == (table[i].hash))) {
                 return i;
@@ -87,7 +110,7 @@ public class MyHashMap<K, V> {
     }
 
     public void clear() {
-        table = (Node<K, V>[]) new Node[capacity];
+        table = (Node<K, V>[]) new Node[CAPACITY];
     }
 
     public int size() {
