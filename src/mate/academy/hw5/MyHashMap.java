@@ -109,6 +109,13 @@ public class MyHashMap<K, V> {
         return -1;
     }
 
+    public boolean contains(K key) {
+        if (get(key) == null) {
+            return false;
+        }
+        return true;
+    }
+
     public void clear() {
         table = (Node<K, V>[]) new Node[CAPACITY];
     }
