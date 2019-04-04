@@ -16,8 +16,14 @@ public class Deserialize {
             return animals;
         }
         catch (Exception ex) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Illegal Argument Exception");
         }
+    }
+
+    public static void main(String[] args) {
+        byte[] b = new byte[4];
+        Animal[] animals = deserializeAnimalArray(b);
+        System.out.println(animals);
     }
 }
 

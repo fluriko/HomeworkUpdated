@@ -12,7 +12,7 @@ class Pair<T, E> {
         this(null, null);
     }
 
-    public Pair(T firstElement, E secondElement) {
+    private Pair(T firstElement, E secondElement) {
         this.firstElement = firstElement;
         this.secondElement = secondElement;
     }
