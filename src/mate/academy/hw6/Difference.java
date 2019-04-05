@@ -3,6 +3,7 @@ package mate.academy.hw6;
 import java.util.HashSet;
 import java.util.Set;
 
+// topic 6.2.1 https://stepik.org/lesson/12775/step/12?unit=3123
 public class Difference {
     public static <T> Set<T> symmetricDifference(Set<? extends T> set1, Set<? extends T> set2) {
         Set<T> first = new HashSet<>(set1);

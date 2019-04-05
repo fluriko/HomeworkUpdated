@@ -3,7 +3,7 @@ package mate.academy.hw6;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 
-// https://stepik.org/lesson/12775/step/12?unit=3123
+// topic 6.1 https://stepik.org/lesson/12775/step/12?unit=3123
 class Pair<T, E> {
     private final T firstElement;
     private final E secondElement;

@@ -5,7 +5,7 @@ import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.Objects;
 
-// https://stepik.org/lesson/12785/step/8?unit=3132
+// topic 5.4 https://stepik.org/lesson/12785/step/8?unit=3132
 public class Deserialize {
     public static Animal[] deserializeAnimalArray(byte[] data) {
         try (ObjectInputStream inputStream = new ObjectInputStream(new ByteArrayInputStream(data))) {
