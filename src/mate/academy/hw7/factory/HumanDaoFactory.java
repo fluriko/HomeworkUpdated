@@ -1,19 +1,19 @@
 package mate.academy.hw7.factory;
 
-import mate.academy.hw7.dao.ClientDao;
-import mate.academy.hw7.dao.FileClientDao;
-import mate.academy.hw7.dao.InMemoryClientDao;
+import mate.academy.hw7.dao.FileHumanDao;
+import mate.academy.hw7.dao.HumanDao;
+import mate.academy.hw7.dao.InMemoryHumanDao;
 import mate.academy.hw7.service.PropertyLoader;
 import java.io.IOException;
 
-public class ClientDaoFactory {
-    private static final ClientDao inMemoryDao = new InMemoryClientDao();
-    private static final ClientDao fileDao = new FileClientDao();
+public class HumanDaoFactory {
+    private static final HumanDao inMemoryDao = new InMemoryHumanDao();
+    private static final HumanDao fileDao = new FileHumanDao();
 
-    public static ClientDao getDao(boolean isFileDao, boolean isInMemoryDao) {
+    public static HumanDao getDao(boolean isFileDao, boolean isINMemoryDao) {
         try {
             String dbName = PropertyLoader.getProperty("db.name");
-            if (dbName.equals("memory") && isInMemoryDao) {
+            if (dbName.equals("memory") && isINMemoryDao) {
                 return inMemoryDao;
             }
         } catch (IOException e) {
@@ -26,4 +26,3 @@ public class ClientDaoFactory {
         }
     }
 }
-
