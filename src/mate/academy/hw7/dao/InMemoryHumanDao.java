@@ -15,7 +15,7 @@ public class InMemoryHumanDao implements HumanDao {
     }
 
     @Override
-    public Human get() {
-        return inMemoryStorage.get(0);
+    public List<Human> get() {
+        return inMemoryStorage;
     }
 }
