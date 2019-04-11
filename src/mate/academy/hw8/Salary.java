@@ -1,4 +1,4 @@
-package mate.academy.hw6;
+package mate.academy.hw8;
 
 // задание ** https://stepik.org/lesson/12781/step/14?unit=3128
 public class Salary extends Information<Integer> {
