@@ -25,8 +25,7 @@ public final class AsciiCharSequence implements CharSequence {
         int newLength = end - start;
         byte[] subSequence = new byte[newLength];
         for (int i = 0; i < subSequence.length; i++) {
-            subSequence[i] = arrayOfBytes[start];
-            start++;
+            subSequence[i] = arrayOfBytes[start++];
         }
         return new AsciiCharSequence(subSequence);
     }

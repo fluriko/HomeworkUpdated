@@ -4,26 +4,26 @@ import java.util.Objects;
 
 // task 2: https://stepik.org/lesson/12769/step/9?unit=3117
 public final class ComplexNumber {
-    private final double VALUE;
-    private final double INDEX;
+    private final double REAL;
+    private final double IMAGINARY;
 
-    public ComplexNumber(double value, double index) {
-        this.VALUE = value;
-        this.INDEX = index;
+    public ComplexNumber(double real, double imaginary) {
+        this.REAL = real;
+        this.IMAGINARY = imaginary;
     }
 
-    public double getRe() {
-        return VALUE;
+    public double getReal() {
+        return REAL;
     }
 
-    public double getIm() {
-        return INDEX;
+    public double getImaginary() {
+        return IMAGINARY;
     }
 
     @Override
     public int hashCode() {
-        String value = Objects.toString(VALUE);
-        String index = Objects.toString(INDEX);
+        String value = Objects.toString(REAL);
+        String index = Objects.toString(IMAGINARY);
         return 25 + value.hashCode() + index.hashCode();
     }
 
@@ -32,11 +32,11 @@ public final class ComplexNumber {
         if (this == object) {
             return true;
         }
-        if (!(this.getClass().equals(object.getClass()))) {
+        if ((object == null) || !(this.getClass().equals(object.getClass()))) {
             return false;
         }
         ComplexNumber complexNumber = (ComplexNumber) object;
-        return (this.VALUE == complexNumber.getRe()
-                && this.INDEX == complexNumber.getIm());
+        return (this.REAL == complexNumber.getReal()
+                && this.IMAGINARY == complexNumber.getImaginary());
     }
 }
