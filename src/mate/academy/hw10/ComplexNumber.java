@@ -1,26 +1,30 @@
 package mate.academy.hw10;
 
+import java.util.Objects;
+
 // task 2: https://stepik.org/lesson/12769/step/9?unit=3117
 public final class ComplexNumber {
-    private final double re;
-    private final double im;
+    private final double VALUE;
+    private final double INDEX;
 
-    public ComplexNumber(double re, double im) {
-        this.re = re;
-        this.im = im;
+    public ComplexNumber(double value, double index) {
+        this.VALUE = value;
+        this.INDEX = index;
     }
 
     public double getRe() {
-        return re;
+        return VALUE;
     }
 
     public double getIm() {
-        return im;
+        return INDEX;
     }
 
     @Override
     public int hashCode() {
-        return (int) (re * im + Math.random() * 9999);
+        String value = Objects.toString(VALUE);
+        String index = Objects.toString(INDEX);
+        return 25 + value.hashCode() + index.hashCode();
     }
 
     @Override
@@ -32,7 +36,7 @@ public final class ComplexNumber {
             return false;
         }
         ComplexNumber complexNumber = (ComplexNumber) object;
-        return (this.re == complexNumber.getRe()
-                && this.im == complexNumber.getIm());
+        return (this.VALUE == complexNumber.getRe()
+                && this.INDEX == complexNumber.getIm());
     }
 }
