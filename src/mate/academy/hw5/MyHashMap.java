@@ -81,6 +81,9 @@ public class MyHashMap<K, V> {
 
     public V get(K key) {
         Node<K, V> node = getNode(key);
+        if (node == null) {
+            return null;
+        }
         return node.value;
     }
 
@@ -118,6 +121,7 @@ public class MyHashMap<K, V> {
 
     public void clear() {
         table = (Node<K, V>[]) new Node[CAPACITY];
+        size = 0;
     }
 
     public int size() {
